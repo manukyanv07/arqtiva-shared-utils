@@ -1,17 +1,17 @@
-# Makefile for @arqtiva/shared-utils
+# Makefile for @manukyanv07/shared-utils
 # Publishes shared library to GitHub Packages under manukyanv07
 
 .PHONY: help clean install test lint build publish publish-patch publish-minor publish-major check-auth setup-auth status unpublish
 
 # Default target
 help: ## Show this help message
-	@echo "Available commands for @arqtiva/shared-utils:"
+	@echo "Available commands for @manukyanv07/shared-utils:"
 	@echo ""
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 	@echo ""
 	@echo "GitHub Packages Configuration:"
 	@echo "  Registry:    https://npm.pkg.github.com"
-	@echo "  Package:     @arqtiva/shared-utils"
+	@echo "  Package:     @manukyanv07/shared-utils"
 	@echo "  Repository:  https://github.com/manukyanv07/arqtiva-shared-utils"
 	@echo "  Owner:       manukyanv07"
 	@echo ""
@@ -73,7 +73,7 @@ setup-auth: ## Setup GitHub Packages authentication
 	@echo ""
 	@read -s -p "Enter your GitHub Personal Access Token: " token; \
 	echo ""; \
-	echo "@arqtiva:registry=https://npm.pkg.github.com" > .npmrc; \
+	echo "@manukyanv07:registry=https://npm.pkg.github.com" > .npmrc; \
 	echo "//npm.pkg.github.com/:_authToken=$$token" >> .npmrc; \
 	echo "✅ Authentication configured for manukyanv07 in .npmrc"
 	@echo "⚠️  Remember to add .npmrc to .gitignore to keep your token secure"
@@ -105,9 +105,9 @@ _publish:
 	@echo "✅ Package published successfully!"
 	@echo ""
 	@echo "📋 Installation instructions:"
-	@echo "  echo '@arqtiva:registry=https://npm.pkg.github.com' >> .npmrc"
+	@echo "  echo '@manukyanv07:registry=https://npm.pkg.github.com' >> .npmrc"
 	@echo "  echo '//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN' >> .npmrc"
-	@echo "  npm install @arqtiva/shared-utils@$$(node -p "require('./package.json').version")"
+	@echo "  npm install @manukyanv07/shared-utils@$$(node -p "require('./package.json').version")"
 	@echo ""
 	@echo "🔗 Package URL: https://github.com/manukyanv07/arqtiva-shared-utils/packages"
 
@@ -119,7 +119,7 @@ status: ## Show package status and latest published version
 	@echo "  Registry:       https://npm.pkg.github.com"
 	@echo ""
 	@echo "🔍 Checking published versions..."
-	@npm view @arqtiva/shared-utils versions --registry=https://npm.pkg.github.com --json 2>/dev/null || echo "  No published versions found or not authenticated"
+	@npm view @manukyanv07/shared-utils versions --registry=https://npm.pkg.github.com --json 2>/dev/null || echo "  No published versions found or not authenticated"
 
 info: status ## Alias for status command
 
@@ -148,7 +148,7 @@ unpublish: ## Unpublish a specific version (USE WITH CAUTION)
 	@read -p "Enter version to unpublish (e.g., 1.0.0): " version; \
 	read -p "Are you sure? This cannot be undone (y/N): " confirm; \
 	if [ "$$confirm" = "y" ] || [ "$$confirm" = "Y" ]; then \
-		npm unpublish @arqtiva/shared-utils@$$version --registry=https://npm.pkg.github.com; \
+		npm unpublish @manukyanv07/shared-utils@$$version --registry=https://npm.pkg.github.com; \
 		echo "✅ Version $$version unpublished"; \
 	else \
 		echo "❌ Unpublish cancelled"; \
@@ -156,7 +156,7 @@ unpublish: ## Unpublish a specific version (USE WITH CAUTION)
 
 check-registry: ## Check if package exists in registry
 	@echo "🔍 Checking package in registry..."
-	@npm view @arqtiva/shared-utils --registry=https://npm.pkg.github.com 2>/dev/null || echo "Package not found in registry"
+	@npm view @manukyanv07/shared-utils --registry=https://npm.pkg.github.com 2>/dev/null || echo "Package not found in registry"
 
 list-files: ## List files that will be included in the package
 	@echo "📁 Files to be included in package:"
@@ -217,7 +217,7 @@ release: validate check-auth ## Full release workflow (patch, publish, git tag)
 # Environment commands
 create-npmrc: ## Create .npmrc file for GitHub Packages
 	@echo "📝 Creating .npmrc file..."
-	@echo "@arqtiva:registry=https://npm.pkg.github.com" > .npmrc
+	@echo "@manukyanv07:registry=https://npm.pkg.github.com" > .npmrc
 	@echo "# Add your GitHub token: //npm.pkg.github.com/:_authToken=YOUR_TOKEN" >> .npmrc
 	@echo "✅ .npmrc created (remember to add your GitHub token)"
 

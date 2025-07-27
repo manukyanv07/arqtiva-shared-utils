@@ -1,4 +1,4 @@
-# @arqtiva/shared-utils
+# @manukyanv07/shared-utils
 
 [![npm version](https://badge.fury.io/js/%40arqtiva%2Fshared-utils.svg)](https://badge.fury.io/js/%40arqtiva%2Fshared-utils)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -18,23 +18,23 @@ Shared utilities for Arqtiva ERP microservices following AWS Lambda best practic
 ### From GitHub Packages (Recommended)
 
 ```bash
-# Configure npm to use GitHub Packages for @arqtiva scope
-echo "@arqtiva:registry=https://npm.pkg.github.com" >> .npmrc
+# Configure npm to use GitHub Packages for @manukyanv07 scope
+echo "@manukyanv07:registry=https://npm.pkg.github.com" >> .npmrc
 
 # Install the package
-npm install @arqtiva/shared-utils
+npm install @manukyanv07/shared-utils
 ```
 
 ### From Private Registry
 
 ```bash
-npm install @arqtiva/shared-utils@latest
+npm install @manukyanv07/shared-utils@latest
 ```
 
 ## Quick Start
 
 ```javascript
-const { getCognitoClient, getDynamoDbClient, validateServiceEnvironment } = require('@arqtiva/shared-utils');
+const { getCognitoClient, getDynamoDbClient, validateServiceEnvironment } = require('@manukyanv07/shared-utils');
 
 // Get optimized AWS clients (with connection pooling)
 const cognitoClient = getCognitoClient();
@@ -138,7 +138,7 @@ const {
   validateServiceEnvironment,
   createLambdaHealthResponse,
   performHealthCheck 
-} = require('@arqtiva/shared-utils');
+} = require('@manukyanv07/shared-utils');
 
 // Validate environment on module load
 validateServiceEnvironment('my-service');
@@ -170,7 +170,7 @@ const {
   createDynamoDbDocumentClient,
   validateEnvironment,
   getEnvVar 
-} = require('@arqtiva/shared-utils');
+} = require('@manukyanv07/shared-utils');
 
 // Custom client configuration
 const cognitoClient = createCognitoClient();
@@ -192,7 +192,7 @@ const customTimeout = getEnvVar('CUSTOM_TIMEOUT', '30000');
 Always validate your environment on module load:
 
 ```javascript
-const { validateServiceEnvironment } = require('@arqtiva/shared-utils');
+const { validateServiceEnvironment } = require('@manukyanv07/shared-utils');
 
 // At the top of your main handler file
 validateServiceEnvironment('your-service-name');
