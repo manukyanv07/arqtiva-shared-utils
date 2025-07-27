@@ -1,0 +1,53 @@
+{
+  "name": "@arqtiva/shared-utils",
+  "version": "1.0.0",
+  "description": "Shared utilities for Arqtiva ERP microservices following AWS Lambda best practices",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manukyanv07/arqtiva-shared-utils.git"
+  },
+  "keywords": [
+    "aws",
+    "lambda",
+    "microservices",
+    "utilities",
+    "erp",
+    "dynamodb",
+    "cognito"
+  ],
+  "author": "Arqtiva ERP Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.450.0",
+    "@aws-sdk/client-dynamodb": "^3.450.0",
+    "@aws-sdk/lib-dynamodb": "^3.450.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.55.0",
+    "@types/node": "^20.0.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "npm test && npm run lint",
+    "version": "npm run lint && npm test"
+  },
+  "files": [
+    "clients/",
+    "utils/",
+    "index.js",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
