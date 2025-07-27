@@ -54,8 +54,8 @@ function createDynamoDbDocumentClient() {
   }
 
   // In test environment, allow mock injection
-  if (process.env.NODE_ENV === 'test' && global.mockDynamoClient) {
-    dynamoDbDocumentClient = global.mockDynamoClient;
+  if (process.env.NODE_ENV === 'test' && global.mockDynamoDbDocumentClient) {
+    dynamoDbDocumentClient = global.mockDynamoDbDocumentClient;
     return dynamoDbDocumentClient;
   }
 
@@ -111,7 +111,8 @@ function initializeClients() {
     // Initialize clients immediately in production for maximum reuse
     createCognitoClient();
     createDynamoDbDocumentClient();
-    
+
+    // eslint-disable-next-line no-console
     console.log('AWS clients initialized for Lambda execution context reuse');
   }
 }
@@ -138,7 +139,7 @@ function getClientHealth() {
     },
     dynamodb: {
       initialized: !!dynamoDbDocumentClient,
-      isMock: process.env.NODE_ENV === 'test' && dynamoDbDocumentClient === global.mockDynamoClient
+      isMock: process.env.NODE_ENV === 'test' && dynamoDbDocumentClient === global.mockDynamoDbDocumentClient
     }
   };
 }
@@ -150,11 +151,11 @@ module.exports = {
   // Primary exports
   getCognitoClient,
   getDynamoDbClient,
-  
+
   // Factory functions
   createCognitoClient,
   createDynamoDbDocumentClient,
-  
+
   // Utility functions
   initializeClients,
   resetClients,

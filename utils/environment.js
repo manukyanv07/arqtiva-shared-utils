@@ -35,10 +35,10 @@ function validateEnvironment(requiredVars = [], options = {}) {
   if (missing.length > 0) {
     const warningMessage = `${serviceName}: Missing environment variables: ${missing.join(', ')}`;
     warnings.push(warningMessage);
-    
+
     // Log warning but don't fail (unless explicitly requested)
     console.warn(warningMessage);
-    
+
     if (throwOnMissing) {
       throw new Error(warningMessage);
     }
@@ -91,7 +91,7 @@ const SERVICE_ENV_VARS = {
  */
 function validateServiceEnvironment(serviceName, options = {}) {
   const requiredVars = SERVICE_ENV_VARS[serviceName] || [];
-  
+
   return validateEnvironment(requiredVars, {
     serviceName,
     ...options
@@ -143,11 +143,11 @@ function isProductionEnvironment() {
  */
 function getEnvVar(varName, defaultValue = null, required = false) {
   const value = process.env[varName];
-  
+
   if (!value && required) {
     throw new Error(`Required environment variable ${varName} is not set`);
   }
-  
+
   return value || defaultValue;
 }
 
@@ -167,13 +167,13 @@ function maskSensitiveEnvVars(env = process.env) {
   ];
 
   const masked = { ...env };
-  
+
   Object.keys(masked).forEach(key => {
     if (sensitiveKeys.some(sensitive => key.toUpperCase().includes(sensitive))) {
       masked[key] = '***MASKED***';
     }
   });
-  
+
   return masked;
 }
 
@@ -181,16 +181,16 @@ module.exports = {
   // Primary functions
   validateEnvironment,
   validateServiceEnvironment,
-  
+
   // Environment info
   getEnvironmentInfo,
   isTestEnvironment,
   isProductionEnvironment,
-  
+
   // Utilities
   getEnvVar,
   maskSensitiveEnvVars,
-  
+
   // Constants
   STANDARD_ENV_VARS,
   SERVICE_ENV_VARS

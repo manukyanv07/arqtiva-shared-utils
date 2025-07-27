@@ -1,4 +1,4 @@
-can 'use strict';
+'use strict';
 
 /**
  * Example: Migrated auth-service using @arqtiva/shared-utils

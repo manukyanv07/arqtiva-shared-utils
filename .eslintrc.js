@@ -4,6 +4,11 @@ module.exports = {
     jest: true,
     es2021: true
   },
+  ignorePatterns: [
+    'examples/**/*',
+    'node_modules/**/*',
+    'coverage/**/*'
+  ],
   extends: [
     'eslint:recommended'
   ],
@@ -17,14 +22,14 @@ module.exports = {
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'prefer-const': 'error',
     'no-var': 'error',
-    
+
     // Best practices
     'eqeqeq': ['error', 'always'],
     'curly': ['error', 'all'],
     'no-eval': 'error',
     'no-implied-eval': 'error',
     'no-new-func': 'error',
-    
+
     // Style
     'indent': ['error', 2],
     'quotes': ['error', 'single'],
@@ -32,7 +37,7 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'no-trailing-spaces': 'error',
     'no-multi-spaces': 'error',
-    
+
     // Node.js specific
     'no-process-exit': 'error',
     'no-process-env': 'off', // We need process.env for configuration

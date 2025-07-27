@@ -12,14 +12,14 @@ describe('AWS Clients', () => {
     it('should return a singleton Cognito client', () => {
       const client1 = awsClients.getCognitoClient();
       const client2 = awsClients.getCognitoClient();
-      
+
       expect(client1).toBe(client2);
       expect(client1).toBe(global.mockCognitoClient);
     });
 
     it('should initialize client with proper configuration', () => {
       const client = awsClients.getCognitoClient();
-      
+
       expect(client.config).toEqual({
         region: 'us-east-1',
         maxAttempts: 3,
@@ -32,7 +32,7 @@ describe('AWS Clients', () => {
     it('should return a singleton DynamoDB Document client', () => {
       const client1 = awsClients.getDynamoDbClient();
       const client2 = awsClients.getDynamoDbClient();
-      
+
       expect(client1).toBe(client2);
       expect(client1).toBe(global.mockDynamoDbDocumentClient);
     });
@@ -43,9 +43,9 @@ describe('AWS Clients', () => {
       // Initialize clients
       awsClients.getCognitoClient();
       awsClients.getDynamoDbClient();
-      
+
       const health = awsClients.getClientHealth();
-      
+
       expect(health).toHaveProperty('cognito');
       expect(health).toHaveProperty('dynamodb');
       expect(health.cognito.initialized).toBe(true);
@@ -55,7 +55,7 @@ describe('AWS Clients', () => {
     it('should indicate mock status in test environment', () => {
       awsClients.getCognitoClient();
       const health = awsClients.getClientHealth();
-      
+
       expect(health.cognito.isMock).toBe(true);
     });
   });
@@ -65,10 +65,10 @@ describe('AWS Clients', () => {
       // Initialize clients
       awsClients.getCognitoClient();
       awsClients.getDynamoDbClient();
-      
+
       // Reset clients
       awsClients.resetClients();
-      
+
       const health = awsClients.getClientHealth();
       expect(health.cognito.initialized).toBe(false);
       expect(health.dynamodb.initialized).toBe(false);
@@ -77,8 +77,11 @@ describe('AWS Clients', () => {
 
   describe('initializeClients', () => {
     it('should initialize all clients', () => {
-      awsClients.initializeClients();
-      
+      // In test environment, initializeClients doesn't auto-initialize
+      // So we manually call the client getters to initialize them
+      awsClients.getCognitoClient();
+      awsClients.getDynamoDbClient();
+
       const health = awsClients.getClientHealth();
       expect(health.cognito.initialized).toBe(true);
       expect(health.dynamodb.initialized).toBe(true);

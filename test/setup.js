@@ -60,7 +60,7 @@ jest.mock('@aws-sdk/lib-dynamodb', () => ({
 // Reset mocks before each test
 beforeEach(() => {
   jest.clearAllMocks();
-  
+
   // Reset client mocks
   mockCognitoClient.send.mockClear();
   mockDynamoClient.send.mockClear();

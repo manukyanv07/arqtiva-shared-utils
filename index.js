@@ -2,9 +2,9 @@
 
 /**
  * @arqtiva/shared-utils
- * 
+ *
  * Shared utilities for Arqtiva ERP microservices following AWS Lambda best practices
- * 
+ *
  * @version 1.0.0
  * @author Arqtiva ERP Team
  */
@@ -22,18 +22,18 @@ module.exports = {
   clients: {
     aws: awsClients
   },
-  
+
   // Utilities
   utils: {
     environment,
     health
   },
-  
+
   // Direct exports for convenience (backward compatibility)
   ...awsClients,
   environment,
   health,
-  
+
   // Version info
   version: require('./package.json').version
 };

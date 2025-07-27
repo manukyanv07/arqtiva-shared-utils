@@ -17,7 +17,7 @@ const { getEnvironmentInfo, validateServiceEnvironment } = require('./environmen
  */
 function createHealthCheckResponse(serviceName, additionalChecks = {}) {
   const envInfo = getEnvironmentInfo();
-  
+
   const baseChecks = {
     environment: 'ok',
     timestamp: envInfo.timestamp,
@@ -62,13 +62,13 @@ async function performHealthCheck(serviceName, clients = {}, options = {}) {
       const envValidation = validateServiceEnvironment(serviceName, {
         skipInProduction: false // Always check in health checks
       });
-      
+
       checks.environment = {
         status: envValidation.valid ? 'ok' : 'warning',
         missing: envValidation.missing,
         warnings: envValidation.warnings
       };
-      
+
       if (!envValidation.valid) {
         overallStatus = 'degraded';
       }
@@ -161,7 +161,7 @@ async function checkAWSClientHealth(awsClient, clientType = 'unknown') {
   try {
     // Basic client configuration check
     const config = awsClient.config || {};
-    
+
     return {
       status: 'ok',
       type: clientType,
@@ -187,8 +187,8 @@ async function checkAWSClientHealth(awsClient, clientType = 'unknown') {
  * @returns {Object} Lambda response object with CORS headers
  */
 function createLambdaHealthResponse(healthData, statusCode = 200) {
-  const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev';
-  
+  // const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'dev';
+
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
@@ -224,7 +224,7 @@ function createLambdaHealthResponse(healthData, statusCode = 200) {
  * @returns {Function} Middleware function
  */
 function healthCheckMiddleware(serviceName, clients = {}) {
-  return async (event, context) => {
+  return async (event, _context) => {
     // Only handle health check paths
     if (!event.path || !event.path.includes('/health')) {
       return null; // Let other handlers process
@@ -237,8 +237,8 @@ function healthCheckMiddleware(serviceName, clients = {}) {
         includeMetrics: event.queryStringParameters?.metrics === 'true'
       });
 
-      const statusCode = healthData.status === 'healthy' ? 200 : 
-                        healthData.status === 'degraded' ? 200 : 503;
+      const statusCode = healthData.status === 'healthy' ? 200 :
+        healthData.status === 'degraded' ? 200 : 503;
 
       return createLambdaHealthResponse(healthData, statusCode);
     } catch (error) {
@@ -259,10 +259,10 @@ module.exports = {
   createHealthCheckResponse,
   performHealthCheck,
   basicHealthCheck,
-  
+
   // AWS specific
   checkAWSClientHealth,
-  
+
   // Lambda specific
   createLambdaHealthResponse,
   healthCheckMiddleware
