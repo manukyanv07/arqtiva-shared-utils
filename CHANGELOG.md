@@ -67,11 +67,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - No secrets or credentials in logs
 - Security audit in CI/CD pipeline
 
+## [1.1.0] - 2025-07-27
+
+### Added
+- **Structured Logger**: New `utils/logger.js` with AWS Lambda best practices
+  - JSON-formatted logging for CloudWatch Logs
+  - Automatic security filtering of sensitive data (passwords, tokens)
+  - Performance metrics tracking with `logPerformance()`
+  - Business metrics with `logMetric()` 
+  - Security event logging with `logSecurity()`
+  - Environment-aware debug logging (non-production only)
+  - Lambda event logging with customizable inclusion options
+  - Correlation ID generation for request tracing
+
+### Enhanced
+- **Shared Utilities**: Logger exported as `Logger` in main index.js
+- **Security**: Comprehensive filtering of sensitive headers and body content
+- **CloudWatch Integration**: Optimized JSON structure for CloudWatch Logs analysis
+
+### Breaking Changes
+- None - fully backward compatible
+
 ## [Unreleased]
 
 ### Planned Features
 - Connection health monitoring with automatic recovery
 - Advanced caching strategies for frequent operations
-- Metrics collection and monitoring integration
 - Rate limiting utilities for API calls
-- Request/response logging utilities

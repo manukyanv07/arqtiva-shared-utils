@@ -1,6 +1,6 @@
 {
   "name": "@manukyanv07/shared-utils",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Shared utilities for Arqtiva ERP microservices following AWS Lambda best practices",
   "main": "index.js",
   "repository": {
